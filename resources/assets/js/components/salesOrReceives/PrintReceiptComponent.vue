@@ -56,7 +56,7 @@
                     importCSS: false,
                     importStyle: true,
                     printContainer: true,
-                    debug: true,
+                    debug: false,
                     header: null
                 });
                 this.$emit("resetGetInvoiceBeforeDonePayment", false);
