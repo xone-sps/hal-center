@@ -53,7 +53,7 @@
         methods: {
             printReceiptBeforeDonePayment() {
                 $("#cart-print-area").printThis({
-                    importCSS: true,
+                    importCSS: false,
                     importStyle: true,
                     printContainer: true,
                     debug: true,
