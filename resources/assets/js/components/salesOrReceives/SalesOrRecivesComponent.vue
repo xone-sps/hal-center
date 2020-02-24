@@ -767,8 +767,7 @@
                                       @amount="bankOrCardTransfer"
                                       @getUpdatedInvoice="getUpdatedInvoice"
                                       @makeInvoiceIdNull="makeInvoiceIdNull"
-                                      @makePlaceOrderTrue="makePlaceOrderTrue"
-                >
+                                      @makePlaceOrderTrue="makePlaceOrderTrue">
                 </cart-payment-details>
             </div>
         </div>
