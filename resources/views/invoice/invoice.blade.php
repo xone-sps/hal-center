@@ -60,7 +60,6 @@
             .invoice-table td{
                 padding: 7px 0;
             }
-
         </style>
     </head>
     <body>
@@ -76,7 +75,7 @@
             </div>
 
             <div class="invoice-middle">
-                <table style="border-collapse: collapse !important; width: 100% !important; line-height: .5em; margin-bottom: -1em;">
+                {{-- <table style="border-collapse: collapse !important; width: 100% !important; line-height: .5em; margin-bottom: -1em;">
                     <tr>
                         <td>
                             <p>
@@ -95,7 +94,7 @@
                             </p>
                         </td>
                     </tr>
-                </table>
+                </table> --}}
             </div>
 
             <div class="invoice-table" style="line-height: 1em;">

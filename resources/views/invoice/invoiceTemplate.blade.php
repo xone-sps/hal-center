@@ -20,7 +20,7 @@
 </head>
 <body style="background: #fff !important;color:#000000">
 <div id="cart-print"  style="padding: 20px !important; color: #000;font-family:  DejaVu Sans,'Raleway', sans-serif;">
-    <div>  {!! $templateData !!}</div>
+    {{-- <div>  {!! $templateData !!}</div> --}}
 </div>
 </body>
 </html>
