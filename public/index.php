@@ -4,8 +4,6 @@ $gainConfig = require_once '../config/gain.php';
 
 
 if ($gainConfig['installed'] == false) {
-
-
 //check requirements.
 //if there is any missing extension, redirect to check.php
 
