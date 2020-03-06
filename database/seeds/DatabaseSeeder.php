@@ -15,15 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-//            UsersTableSeeder::class,
-//            EmailTemplateTableSeeder::class,
-//            TaxTableSeeder::class,
-//            SettingsTableSeeder::class,
-//            PaymentMethodsTableSeeder::class,
-//            BranchesTableSeeder::class,
-//            CashRegisterTableSeeder::class,
+            UsersTableSeeder::class,
+            EmailTemplateTableSeeder::class,
+            TaxTableSeeder::class,
+            SettingsTableSeeder::class,
+            PaymentMethodsTableSeeder::class,
+            BranchesTableSeeder::class,
+            CashRegisterTableSeeder::class,
             InvoiceTemplateTableSeeder::class,
-//            AdjustStockTableSeeder::class,
+            AdjustStockTableSeeder::class,
         ]);
     }
 }
