@@ -18,10 +18,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // install for customer
-        $first_name = session('first_name');
-        $last_name = session('last_name');
-        $email = session('email');
-        $password = session('password');
+        $first_name = "Sab Sung Dai";// session('first_name');
+        $last_name = "Sab Sung Dai"; // session('last_name');
+        $email = "sabsungai_admin@gmail.com"; // session('email');
+        $password = "sabsungai_admin123";// session('password');
 
         DB::table('users')->insert([
 
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'verified' => 1,
             'is_admin' => 1,
             'user_type' => 'staff',
-            'branch_id' =>1,
+            'branch_id' => 1,
             'token' => ''
         ]);
     }

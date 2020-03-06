@@ -13,7 +13,7 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $purchase_code = session('purchase_code');
+        $purchase_code = '5a1b9c8a-f1b7-41e9-a3be-3c1fc692fc8b'; // session('purchase_code');
         DB::table('settings')->insert([
             ['setting_name'     => 'time_format',                   'setting_value'   => '12h'],
             ['setting_name'     => 'date_format' ,                  'setting_value'   => 'Y-m-d'],
