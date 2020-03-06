@@ -3,7 +3,7 @@
 $gainConfig = require_once '../config/gain.php';
 
 
-if ($gainConfig['installed'] == false) {
+if ($gainConfig['installed'] == true) {
 
 
 //check requirements.
