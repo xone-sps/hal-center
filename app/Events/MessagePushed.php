@@ -53,6 +53,6 @@ class MessagePushed implements ShouldBroadcastNow
      */
     public function broadcastWith()
     {
-        return ['title' => 'This notification from ItSolutionStuff.com'];
+        return ['title' => 'This notification from SabSungDai'];
     }
 }
