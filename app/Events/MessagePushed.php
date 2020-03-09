@@ -53,6 +53,11 @@ class MessagePushed implements ShouldBroadcastNow
      */
     public function broadcastWith()
     {
-        return ['title' => 'This notification from SabSungDai'];
+        $request = request();
+        return [
+            'title' => 'This notification from SabSungDai',
+            'ip' => $request->ip(),
+            'client_ip' => $request->getClientIp()
+        ];
     }
 }
