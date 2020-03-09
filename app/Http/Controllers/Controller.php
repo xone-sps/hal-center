@@ -47,27 +47,29 @@ class Controller extends BaseController
             $this->sender_mail = Config::get('email_from_address');
 
             $this->userss = Auth::user();
+            if (isset($this->userss)) {
+                $data = ShortcutKey::where('user_id', $this->userss['id'])->where('customShortcuts', Null)->count();
 
-            $data = ShortcutKey::where('user_id', $this->userss['id'])->where('customShortcuts', Null)->count();
-
-            if ($data == 1) {
-                $data = ShortcutKey::select('defaultShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
-                $shortCuts = unserialize($data['defaultShortcuts']);
-            } else {
-                $data = ShortcutKey::select('customShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
-                $shortCuts = unserialize($data['customShortcuts']);
-            }
-
-            Config::set('overAllShortcutStatus', $data['shortcutsStatus']);
-
-            if ($shortCuts != false) {
-                foreach ($shortCuts as $shortCut) {
-                    Config::set($shortCut['action_name'], $shortCut['shortcut_key']);
-                    Config::set($shortCut['action_name'] . '_status', $shortCut['status']);
+                if ($data == 1) {
+                    $data = ShortcutKey::select('defaultShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
+                    $shortCuts = unserialize($data['defaultShortcuts']);
+                } else {
+                    $data = ShortcutKey::select('customShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
+                    $shortCuts = unserialize($data['customShortcuts']);
                 }
+
+                Config::set('overAllShortcutStatus', $data['shortcutsStatus']);
+
+                if ($shortCuts != false) {
+                    foreach ($shortCuts as $shortCut) {
+                        Config::set($shortCut['action_name'], $shortCut['shortcut_key']);
+                        Config::set($shortCut['action_name'] . '_status', $shortCut['status']);
+                    }
+                }
+
+                Config::set('dateFormat', $allSettingFormat->getDateRangeFormat());
             }
 
-            Config::set('dateFormat', $allSettingFormat->getDateRangeFormat());
         }
     }
 

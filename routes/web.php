@@ -421,3 +421,12 @@ Route::get('/js/lang.js', function () {
     echo ('window.i18n = ' . json_encode(array("lang" => $strings)) . ';');
     exit();
 })->name('assets.lang');
+
+Route::get('socket/', function () {
+   return view('socket');
+});
+
+Route::get('socket/t', function () {
+    event(new \App\Events\MessagePushed());
+    dd('Event Run Successfully.');
+});

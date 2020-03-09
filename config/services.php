@@ -37,5 +37,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'socketio' => [
+        'echo' => [
+            'port' => env('LARAVEL_ECHO_PORT'),
+        ]
+    ]
 
 ];

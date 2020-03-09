@@ -12,5 +12,5 @@ return [
     "app_id" => 'gain-pos',
 
     //installed verify
-    "installed" => false,
+    "installed" => true,
 ];
