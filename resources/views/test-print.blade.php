@@ -18,7 +18,7 @@
 
         #cart-print-area {
             padding: 10px 10px;
-            font-size: 24px;
+            font-size: 32px;
         }
     </style>
 </head>
