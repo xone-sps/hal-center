@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
+        body {
+          margin: 0;
+          padding: 0;
+        }
         section#invoice-sales {
             font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
             arial, serif, sans-serif !important;
