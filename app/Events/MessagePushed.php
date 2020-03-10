@@ -32,7 +32,7 @@ class MessagePushed implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        //return new PrivateChannel('user-channel');
+        // return new PrivateChannel('user-channel');
         return new Channel('user-channel');
     }
 

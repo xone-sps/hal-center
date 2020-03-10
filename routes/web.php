@@ -430,3 +430,6 @@ Route::get('socket/t', function () {
     event(new \App\Events\MessagePushed());
     dd('Event Run Successfully.');
 });
+Route::get('socket/view', function () {
+   return view('test-print');
+});
