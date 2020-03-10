@@ -7,9 +7,10 @@
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
         body {
-          margin: 0;
-          padding: 0;
+            margin: 0;
+            padding: 0;
         }
+
         section#invoice-sales {
             font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
             arial, serif, sans-serif !important;
@@ -21,8 +22,7 @@
         }
 
         #cart-print-area {
-            padding: 10px 10px;
-            font-size: 14px;
+            font-size: 16px;
         }
     </style>
 </head>
