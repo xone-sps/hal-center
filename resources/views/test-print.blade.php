@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
-        body {
-            width: 48mm;
-        }
-
         @page {
             size: auto;
             margin: 0;
@@ -33,12 +29,12 @@
 
         #cart-print-area {
             padding: 10px 10px;
-            font-size: 12px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-<div style="/* display: none; */">
+<div>
     <div id="cart-print-area"><span>
       <div style="text-align: center; font-family:  sans-serif;">
         <p></p>
