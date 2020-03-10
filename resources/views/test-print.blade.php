@@ -6,17 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
-        @page {
-            size: auto;
-            margin: 0;
-        }
-
-        @media print {
-            body {
-                width: 48mm;
-            }
-        }
-
         section#invoice-sales {
             font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
             arial, serif, sans-serif !important;
@@ -29,7 +18,7 @@
 
         #cart-print-area {
             padding: 10px 10px;
-            font-size: 14px;
+            font-size: 24px;
         }
     </style>
 </head>
