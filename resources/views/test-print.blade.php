@@ -18,7 +18,7 @@
 
         #cart-print-area {
             padding: 10px 10px;
-            font-size: 32px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -28,7 +28,7 @@
       <div style="text-align: center; font-family:  sans-serif;">
         <p></p>
         <div>
-          <img class="invoice-logo" style="max-width: 180px; height: auto; margin: 0 auto;"
+          <img class="invoice-logo" style="max-width: 140px; height: auto; margin: 0 auto;"
                src="http://sabsungdai.com/uploads/logo/logo_37106859.jpeg" alt="Logo">
         </div>
         <p></p>
