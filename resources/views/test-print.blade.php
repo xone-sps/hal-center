@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
+        body {
+            width: 48mm;
+        }
+
+        @page {
+            size: auto;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                width: 48mm;
+            }
+        }
+
         section#invoice-sales {
             font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
             arial, serif, sans-serif !important;
@@ -28,7 +43,7 @@
       <div style="text-align: center; font-family:  sans-serif;">
         <p></p>
         <div>
-          <img class="invoice-logo" style="max-width: 200px; height: auto; margin: 0 auto;"
+          <img class="invoice-logo" style="max-width: 140px; height: auto; margin: 0 auto;"
                src="http://sabsungdai.com/uploads/logo/logo_37106859.jpeg" alt="Logo">
         </div>
         <p></p>
