@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MessagePushed implements ShouldBroadcastNow
+class PrintServiceMessagePushed implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -32,8 +32,8 @@ class MessagePushed implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('user-channel');
-        return new Channel('user-channel');
+        // return new PrivateChannel('user-print-channel');
+        return new Channel('user-print-channel');
     }
 
     /**
@@ -43,7 +43,7 @@ class MessagePushed implements ShouldBroadcastNow
      */
     public function broadcastAs()
     {
-        return 'UserEvent';
+        return 'UserPrintEvent';
     }
 
     /**
@@ -55,7 +55,7 @@ class MessagePushed implements ShouldBroadcastNow
     {
         $request = request();
         return [
-            'title' => 'This notification from SabSungDai',
+            'title' => 'This notification from printing service',
             'ip' => $request->ip(),
             'client_ip' => $request->getClientIp()
         ];

@@ -427,7 +427,7 @@ Route::get('socket/', function () {
 });
 
 Route::get('socket/t', function () {
-    event(new \App\Events\MessagePushed());
+    event(new \App\Events\PrintServiceMessagePushed());
     dd('Event Run Successfully.');
 });
 Route::get('socket/view', function () {
