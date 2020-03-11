@@ -22,7 +22,7 @@
         }
 
         #cart-print-area {
-            font-size: 16px;
+            font-size: 18px;
         }
     </style>
 </head>
