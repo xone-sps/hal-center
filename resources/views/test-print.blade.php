@@ -7,8 +7,8 @@
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
         body {
-            margin: 0;
-            padding: 0 4px;
+            margin: 0 2px;
+            padding: 0;
         }
 
         section#invoice-sales {
@@ -22,7 +22,7 @@
         }
 
         #cart-print-area {
-            font-size: 19px;
+            font-size: 18px;
         }
     </style>
 </head>
