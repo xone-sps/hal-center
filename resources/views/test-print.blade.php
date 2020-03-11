@@ -7,7 +7,7 @@
     <title>Laravel Broadcast Redis Socket io Tutorial</title>
     <style type="text/css">
         body {
-            margin: 0;
+            margin: 0 6px;
             padding: 0;
         }
 
