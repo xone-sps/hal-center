@@ -21,7 +21,7 @@
         }
 
         #cart-print-area {
-            font-size: 19px;
+            font-size: 20px;
         }
     </style>
 </head>
