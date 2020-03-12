@@ -435,7 +435,7 @@ Route::get('socket/view', function () {
         ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
         ->mobile()
         ->touch()
-        ->deviceScaleFactor(3.5)
+        ->deviceScaleFactor(2.625)
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
