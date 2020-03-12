@@ -9,6 +9,7 @@
         body {
             margin: 0;
             padding: 0;
+            font-family: Roboto, BoonHome, serif, sans-serif !important;
         }
 
         section#invoice-sales {
