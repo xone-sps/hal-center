@@ -52,10 +52,21 @@ class Controller extends BaseController
 
                 if ($data == 1) {
                     $data = ShortcutKey::select('defaultShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
-                    $shortCuts = unserialize($data['defaultShortcuts']);
+                    if (isset($data)) {
+                        $shortCuts = unserialize($data['defaultShortcuts']);
+                    } else {
+                        $shortCuts = [];
+                    }
                 } else {
                     $data = ShortcutKey::select('customShortcuts', 'shortcutsStatus')->where('user_id', $this->userss['id'])->first();
-                    $shortCuts = unserialize($data['customShortcuts']);
+                    if (isset($data)) {
+                        $shortCuts = unserialize($data['customShortcuts']);
+                    } else {
+                        $shortCuts = [];
+                    }
+                }
+                if (!isset($data)) {
+                    $data = ['shortcutsStatus' => null];
                 }
 
                 Config::set('overAllShortcutStatus', $data['shortcutsStatus']);

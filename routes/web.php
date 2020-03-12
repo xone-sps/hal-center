@@ -418,12 +418,12 @@ Route::get('/js/lang.js', function () {
         return $strings;
     });
     header('Content-Type: text/javascript');
-    echo ('window.i18n = ' . json_encode(array("lang" => $strings)) . ';');
+    echo('window.i18n = ' . json_encode(array("lang" => $strings)) . ';');
     exit();
 })->name('assets.lang');
 
 Route::get('socket/', function () {
-   return view('socket');
+    return view('socket');
 });
 
 Route::get('socket/t', function () {
@@ -431,5 +431,6 @@ Route::get('socket/t', function () {
     dd('Event Run Successfully.');
 });
 Route::get('socket/view', function () {
-   return view('test-print');
+    Spatie\Browsershot\Browsershot::url('https://google.com')->save(public_path('/test-image/test.png'));
+    return view('test-print');
 });

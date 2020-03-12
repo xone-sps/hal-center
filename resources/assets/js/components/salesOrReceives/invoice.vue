@@ -1,6 +1,6 @@
 <template>
     <div style="display:none">
-        <div id="cart-print" style="padding: 20px !important; color: #444d55; font-family: 'Raleway', sans-serif;">
+        <div id="cart-print">
             <span v-html="HTMLcontent"></span>
         </div>
     </div>
@@ -31,6 +31,7 @@
                     printContainer: true,
                     header: null,
                 });
+                console.log('ok1');
                 this.$emit('resetGetInvoice', false);
             },
         },

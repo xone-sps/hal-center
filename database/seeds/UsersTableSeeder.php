@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $first_name = "Sab Sung Dai";// session('first_name');
         $last_name = "Sab Sung Dai"; // session('last_name');
         $email = "sabsungdai_admin@gmail.com"; // session('email');
-        $password = "sabsungdai_admin";// session('password');
+        $password = "sabsungdai_admin123";// session('password');
 
         DB::table('users')->insert([
 

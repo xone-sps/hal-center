@@ -8,7 +8,6 @@
 
 <script>
     import axiosGetPost from "../../helper/axiosGetPostCommon";
-
     export default {
         extends: axiosGetPost,
 
@@ -37,6 +36,11 @@
                 paymentDetails: ""
             };
         },
+        computed: {
+            isMobile() {
+                return window.innerWidth <= 1024
+            }
+        },
         watch: {
             print_invoice_before_done_payment: function (newVal) {
                 if (newVal) {
@@ -52,13 +56,17 @@
         },
         methods: {
             printReceiptBeforeDonePayment() {
-                $("#cart-print-area").printThis({
-                    importCSS: false,
-                    importStyle: true,
-                    printContainer: true,
-                    debug: false,
-                    header: null
-                });
+                if (this.isMobile) {
+                    $("#cart-print-area").printThis({
+                        importCSS: false,
+                        importStyle: true,
+                        printContainer: true,
+                        debug: false,
+                        header: null
+                    });
+                } else {
+
+                }
                 this.$emit("resetGetInvoiceBeforeDonePayment", false);
             },
             printInvoiceGenerate() {

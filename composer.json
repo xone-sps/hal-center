@@ -15,8 +15,10 @@
         "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
+        "nesk/puphpeteer": "^1.6",
         "predis/predis": "^1.1",
-        "rachidlaasri/laravel-installer": "^4.0"
+        "rachidlaasri/laravel-installer": "^4.0",
+        "spatie/browsershot": "^3.35"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
