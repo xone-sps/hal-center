@@ -432,10 +432,11 @@ Route::get('socket/t', function () {
 });
 Route::get('socket/view', function () {
     Spatie\Browsershot\Browsershot::url('http://167.99.67.79/socket/bin')
+        ->windowSize(1080, 2314)
         ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
         ->mobile()
         ->touch()
-        ->deviceScaleFactor(2.625)
+        ->deviceScaleFactor(2)
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
