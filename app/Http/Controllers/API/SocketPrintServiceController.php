@@ -34,16 +34,16 @@ class SocketPrintServiceController extends Controller
             ->fullPage()
             ->hideBackground()
             ->save(public_path($this->image_path . $filename));
-
-        event(new PrintServiceMessagePushed($user, $filename));
+        $data = [
+            'filename' => $filename,
+            'url' => url($this->image_path . $filename),
+            'content' => $html
+        ];
+        event(new PrintServiceMessagePushed($user, $data));
 
         return response()->json([
             'success' => true,
-            'data' => [
-                'filename' => $filename,
-                'url' => url($this->image_path . $filename),
-                'content' => $html
-            ]
+            'data' => $data
         ]);
     }
 
