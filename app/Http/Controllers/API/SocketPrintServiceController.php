@@ -32,7 +32,6 @@ class SocketPrintServiceController extends Controller
             ->mobile()
             ->landscape(false)
             ->fullPage()
-            ->greyscale()
             ->disableJavascript()
             ->save(public_path($this->image_path . $filename));
 
