@@ -187,9 +187,15 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" v-if="!isPaymentDone" @click.prevent="printReceiptBeforeDonePayment()"
+                <a href="#" v-if="!isPaymentDone && !printLoading"
+                   @click.prevent="printReceiptBeforeDonePayment()"
                    class="px-2 btn-before-receipt">
                     <i class="la la-print pr-3"></i>
+                    {{ trans('lang.print_received') }}
+                </a>
+                <a href="#" v-else-if="!isPaymentDone"
+                   class="px-2 btn-before-receipt">
+                    <i class="la la-spin la-spinner mr-3"></i>
                     {{ trans('lang.print_received') }}
                 </a>
             </div>
@@ -316,8 +322,14 @@
                     <div class="col-12 text-center">
                         <h4>{{ trans('lang.payment_received') }}</h4>
                     </div>
-                    <a href="#" @click.prevent="printReceipt()" class="printReceiptButton">
+                    <a v-if="!printLoading" href="#"
+                       @click.prevent="printReceipt()" class="printReceiptButton">
                         <i class="la la-print pr-3"></i>
+                        {{ trans('lang.print_received') }}
+                    </a>
+                    <a v-else href="#"
+                     class="printReceiptButton">
+                        <i class="la la-spin la-spinner mr-3"></i>
                         {{ trans('lang.print_received') }}
                     </a>
                 </div>
@@ -325,6 +337,7 @@
         </div>
         <invoice :printInvoice="printInvoice"
                  :HTMLcontent="HTMLcontent"
+                 @printingDone="printLoadingState"
                  @resetGetInvoice="resetGetInvoice">
         </invoice>
         <print-receipt-component :print_invoice_before_done_payment="printInvoiceBeforeDonePayment"
@@ -341,6 +354,7 @@
                                  :invoice_template="invoice_template"
                                  :user="user"
                                  :logo="logo"
+                                 @printingBeforeDone="printLoadingState"
                                  @resetGetInvoiceBeforeDonePayment="resetGetInvoiceBeforeDonePayment">
         </print-receipt-component>
     </div>
@@ -429,6 +443,7 @@
                         return true;
                     }
                 },
+                printLoading: false,
             }
         },
         created() {
@@ -917,6 +932,9 @@
             absValue(value) {
                 return Math.abs(value);
             },
+            printLoadingState(state) {
+                this.printLoading = state
+            }
         },
     }
 </script>

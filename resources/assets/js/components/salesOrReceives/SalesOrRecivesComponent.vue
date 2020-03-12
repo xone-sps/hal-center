@@ -57,7 +57,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="p-1 px-2 ml-2 rounded app-color sales-nav text-white" @click.prevent="openRegisterInfoModal">
+                    <a href="#" class="p-1 px-2 ml-2 rounded app-color sales-nav text-white"
+                       @click.prevent="openRegisterInfoModal">
                         {{trans('lang.register_info')}}
                     </a>
                 </li>

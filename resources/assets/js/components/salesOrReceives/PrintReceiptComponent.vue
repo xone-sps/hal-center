@@ -66,12 +66,13 @@
                         header: null
                     });
                 } else {
+                    this.$emit("printingBeforeDone", true);
                     this.axiosPost('/socket/store/image-template', {
                         'html': this.invoiceTemplate
                     }, (res) => {
-                        console.log(res)
+                        this.$emit("printingBeforeDone", false);
                     }, (err) => {
-                        console.log(err)
+                        this.$emit("printingBeforeDone", false);
                     });
                 }
                 this.$emit("resetGetInvoiceBeforeDonePayment", false);

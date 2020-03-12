@@ -22,7 +22,8 @@
                 <form class="form-row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-6 col-sm-6 col-md-3 col-lg-3" v-for="restaurantTable in restaurant_tables_branch_wise">
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3"
+                                 v-for="restaurantTable in restaurant_tables_branch_wise">
                                 <a href="#" @click.prevent="selectTable(restaurantTable.id)" class="parent-class">
                                     <div class="card bg-white table-card" @click="activeTableEvent">
                                         <div class="card-body text-small text-center p-2">
@@ -45,10 +46,14 @@
                     </div>
                     <div class="form-group col-12 mb-0">
                         <div class="text-right">
-                            <button type="button"
+                            <button type="button" v-if="!printing"
                                     class="btn app-color mobile-btn mb-0"
                                     @click.prevent="printReceiptBeforeDonePayment()">
                                 <i class="la la-print"></i> {{ trans('lang.print_order') }}
+                            </button>
+                            <button v-else type="button"
+                                    class="btn app-color mobile-btn mb-0">
+                                <i class="la la-spin la-spinner"></i> {{ trans('lang.print_order') }}
                             </button>
                             <button type="button"
                                     class="btn app-color mobile-btn mb-0"
@@ -76,6 +81,7 @@
                                  :user="user"
                                  :logo="logo"
                                  :invoice_template="invoice_template"
+                                 @printingBeforeDone="(s) => printing = s"
                                  @resetGetInvoiceBeforeDonePayment="resetGetInvoiceBeforeDonePayment">
         </print-receipt-component>
     </div>
@@ -114,6 +120,7 @@
                 countOrderInTables: {},
                 orderHoldItems: [],
                 ordersByBookedTable: [],
+                printing: false
             }
         },
         created() {

@@ -72,7 +72,6 @@
 
             $('#datatable-invoice-modal').on('hidePrevented.bs.modal', function (e) {
                 instance.isActiveDatatableInvoiceModal = false;
-                console.log('Test console');
             });
         },
         methods: {

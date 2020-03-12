@@ -23,15 +23,30 @@
                 }
             }
         },
+        computed: {
+            isMobile() {
+                return window.innerWidth <= 1024
+            }
+        },
         methods: {
             printReceipt() {
-                $('#cart-print').printThis({
-                    importCSS: false,
-                    importStyle: true,
-                    printContainer: true,
-                    header: null,
-                });
-                console.log('ok1');
+                if (!this.isMobile) {
+                    $('#cart-print').printThis({
+                        importCSS: false,
+                        importStyle: true,
+                        printContainer: true,
+                        header: null,
+                    });
+                } else {
+                    this.$emit("printingDone", true);
+                    this.axiosPost('/socket/store/image-template', {
+                        'html': this.HTMLcontent
+                    }, (res) => {
+                        this.$emit("printingDone", false);
+                    }, (err) => {
+                        this.$emit("printingDone", false);
+                    });
+                }
                 this.$emit('resetGetInvoice', false);
             },
         },

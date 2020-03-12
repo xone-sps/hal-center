@@ -18,14 +18,16 @@
                     <div class="main-layout-card-header-with-button">
                         <div class="main-layout-card-content-wrapper">
                             <div class="main-layout-card-header-contents text-right">
-                                <button class="btn btn-info app-color mobile-btn" type="submit" @click.prevent="printReceiptBeforeDonePayment">
+                                <button class="btn btn-info app-color mobile-btn" type="submit"
+                                        @click.prevent="printReceiptBeforeDonePayment">
                                     Print
                                 </button>
                             </div>
                         </div>
                     </div>
                     <pre-loader v-if="showPreloader"/>
-                    <div id="cart-print-area" v-else v-html="invoiceTemplate" style="min-height: 500px; max-width: 800px; margin: 0 auto;"></div>
+                    <div id="cart-print-area" v-else v-html="invoiceTemplate"
+                         style="min-height: 500px; max-width: 800px; margin: 0 auto;"></div>
                 </div>
             </div>
         </div>
@@ -35,26 +37,32 @@
 <script>
 
     import axiosGetPost from '../../helper/axiosGetPostCommon';
+
     export default {
         extends: axiosGetPost,
         props: ['id', 'order_type', 'tab_name', 'route_name'],
         data() {
             return {
-                responseData:'',
+                responseData: '',
                 ordersDetailsData: {},
-                showPreloader:true,
-                tabName:'',
-                routeName:'',
-                invoiceTemplate:'',
-                customerDetails:'',
-                itemDetails:'',
-                paymentDetails:'',
-                invoiceLogo:'',
-                exchange:'',
-                subTotal:'',
-                discount:'',
-                total:'',
-                totalTax:'',
+                showPreloader: true,
+                tabName: '',
+                routeName: '',
+                invoiceTemplate: '',
+                customerDetails: '',
+                itemDetails: '',
+                paymentDetails: '',
+                invoiceLogo: '',
+                exchange: '',
+                subTotal: '',
+                discount: '',
+                total: '',
+                totalTax: '',
+            }
+        },
+        computed: {
+            isMobile() {
+                return window.innerWidth <= 1024
             }
         },
         mounted() {
@@ -73,13 +81,13 @@
                         instance.customerDetails = instance.responseData.customer_details;
                         instance.customerDetails = instance.responseData.phone_number;
                         instance.customerDetails = instance.responseData.address;
-                        instance.itemDetails =  instance.responseData.item_details;
-                        instance.paymentDetails =  instance.responseData.payment_details;
-                        instance.invoiceLogo =  instance.responseData.invoice_logo;
-                        instance.exchange =  instance.responseData.exchange_amount.exchange;
-                        instance.subTotal =  instance.responseData.orders_details.sub_total;
-                        instance.total =  instance.responseData.orders_details.total;
-                        instance.totalTax =  instance.responseData.orders_details.total_tax;
+                        instance.itemDetails = instance.responseData.item_details;
+                        instance.paymentDetails = instance.responseData.payment_details;
+                        instance.invoiceLogo = instance.responseData.invoice_logo;
+                        instance.exchange = instance.responseData.exchange_amount.exchange;
+                        instance.subTotal = instance.responseData.orders_details.sub_total;
+                        instance.total = instance.responseData.orders_details.total;
+                        instance.totalTax = instance.responseData.orders_details.total_tax;
                         instance.discount = instance.responseData.orders_details.all_discount;
                         instance.printInvoiceGenerate();
                         instance.showPreloader = false;
@@ -90,19 +98,30 @@
                 );
             },
             printReceiptBeforeDonePayment() {
-                $('#cart-print-area').printThis({
-                    importCSS: true,
-                    importStyle: true,
-                    printContainer: true,
-                    header: null,
-                });
+                if (!this.isMobile) {
+                    $('#cart-print-area').printThis({
+                        importCSS: true,
+                        importStyle: true,
+                        printContainer: true,
+                        header: null,
+                    });
+                } else {
+                    this.$emit("printingDone", true);
+                    this.axiosPost('/socket/store/image-template', {
+                        'html': this.HTMLcontent
+                    }, (res) => {
+                        this.$emit("printingDone", false);
+                    }, (err) => {
+                        this.$emit("printingDone", false);
+                    });
+                }
                 this.$emit('resetGetInvoiceBeforeDonePayment', false);
             },
             printInvoiceGenerate() {
                 let instance = this;
 
-                instance.itemDetails =  this.getInvoiceDetails(instance.itemDetails);
-                instance.paymentDetails =  this.makePaymentDetailsForInvoice(instance.paymentDetails);
+                instance.itemDetails = this.getInvoiceDetails(instance.itemDetails);
+                instance.paymentDetails = this.makePaymentDetailsForInvoice(instance.paymentDetails);
 
                 let invoiceLogo = this.publicPath + '/uploads/logo/' + instance.invoiceLogo,
                     logo = `<div>
@@ -113,7 +132,7 @@
                     '{app_logo}': logo,
                     '{app_name}': this.app_name,
                     '{invoice_id}': instance.ordersDetailsData.invoice_id,
-                    '{employee_name}': instance.ordersDetailsData.first_name + ' ' +instance.ordersDetailsData.last_name,
+                    '{employee_name}': instance.ordersDetailsData.first_name + ' ' + instance.ordersDetailsData.last_name,
                     '{table_name}': '',
                     '{customer_name}': instance.ordersDetailsData.customer_name,
                     '{address}': instance.ordersDetailsData.address,
@@ -129,13 +148,12 @@
                     '{exchange}': instance.numberFormat(this.exchange),
                 };
 
-                if (instance.ordersDetailsData.sales_or_receiving_type == 'customer')
-                {
+                if (instance.ordersDetailsData.sales_or_receiving_type == 'customer') {
                     obj['{phone_number}'] = this.ordersDetailsData.phone_number;
                     obj['{address}'] = this.ordersDetailsData.address;
                 }
 
-                if(this.ordersDetailsData.table_id != null){
+                if (this.ordersDetailsData.table_id != null) {
                     obj['{table_name}'] = this.ordersDetailsData.table_name;
                 }
 
