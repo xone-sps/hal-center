@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: Roboto, BoonHome, serif, sans-serif !important;
-            font-size: 13.5pt;
+            font-size: 14pt;
         }
 
         section#invoice-sales {
@@ -23,7 +23,7 @@
 
         #cart-print-area {
             padding-left: 14px;
-            font-size: 13.5pt;
+            font-size: 14pt;
         }
     </style>
 </head>
