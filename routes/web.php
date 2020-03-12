@@ -438,8 +438,7 @@ Route::get('socket/view', function () {
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
-    $url = url('/test-image/test.png');
-    return "<img src='$url' />";
+    return public_path('/test-image/test.png');
 });
 
 Route::get('socket/bin', function () {
