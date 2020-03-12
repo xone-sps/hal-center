@@ -434,11 +434,10 @@ Route::get('socket/view', function () {
     Spatie\Browsershot\Browsershot::url('http://167.99.67.79/socket/bin')
         ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
         ->windowSize(1080, 2314)
-        ->deviceScaleFactor(3)
         ->mobile()
         ->touch()
         ->landscape(false)
-        ->hideBackground()
+        ->fullPage()
         ->save(public_path('/test-image/test.png'));
     return 'ok';
 });
