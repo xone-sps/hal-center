@@ -444,5 +444,98 @@ Route::get('socket/view', function () {
 });
 
 Route::get('socket/bin', function () {
-    return view('test-print');
+    $html = `<style>
+            section#invoice-sales {
+              font-family: Roboto, 'Google Sans', 'Open Sans', BoonHome, 'Phetsarath OT', arial, serif, sans-serif !important;
+            }
+            table#table-sales * {
+               font-family: Roboto, 'Google Sans', 'Open Sans', BoonHome, 'Phetsarath OT', arial, serif, sans-serif !important;
+            }
+        </style>
+            <div style="text-align: center; font-family:  sans-serif;">
+                        <p><div>
+                            <img class="invoice-logo" style="max-width: 200px; height: auto; margin: 0 auto;" src= "http://foodapppos.test/uploads/logo/default-logo.jpg" alt="Logo">
+                        </div></p>
+                        <h1 style="font-weight: lighter; margin-bottom: 0;">Gain POS</h1>
+                        <br>
+                        <small>Sales Receipt</small>
+                        <br>
+                        <h3 style="text-align:center;">INVOICE</h3>
+                    </div>
+                    <!--header bottom start-->
+                    <div style="margin-bottom:-30px; height:245px; width: 100%; overflow: hidden; display: block; font-family: 'Open Sans' , Roboto, 'Phetsarath OT' , sans-serif;">
+                         <div style="float:left; width: 50%;">
+                             <p style="font-weight:bold;">Invoice ID: <span></span></p>
+                             <p style="font-weight:bold;">Sold To: <span>Walk-in customer</span></p>
+                             <p style="font-weight:bold;">Sold By: <span>Sab Sung Dai Sab Sung Dai</span></p>
+                             <p style="font-weight:bold;">Phone: <span></span></p>
+                             <p style="font-weight:bold;">Address: <span></span></p>
+                         </div>
+                         <div style="float:right; width: 45%;">
+                             <p style="font-weight:bold; text-align: right;">Date : <span>2020-03-12</span></p>
+                             <p style="font-weight:bold; text-align: right;">Time : <span>01:30 PM</span></p>
+                         </div>
+                    </div>
+                    <table id="table-sales" style="border-top: 1px solid #bfbfbf; border-bottom: 1px solid #bfbfbf; border-collapse: collapse; font-weight:500; width: 100%; max-width: 100%; margin-bottom: 0; background-color: transparent;">
+                        <tr>
+                            <th style="text-align: left; padding: 7px 0; border-bottom: 1px solid #bfbfbf; width: 40%;">Items</th>
+                            <th style="text-align: right; padding: 7px 0; border-bottom: 1px solid #bfbfbf;">Qty</th>
+                            <th style="text-align: right; padding: 7px 0; border-bottom: 1px solid #bfbfbf;">Price</th>
+                            <th style="text-align: right; padding: 7px 0; border-bottom: 1px solid #bfbfbf;">Discount</th>
+                            <th style="text-align: right; padding: 7px 0; border-bottom: 1px solid #bfbfbf;">Total</th>
+                        </tr><br>
+                <tr>
+                   <td style="padding: 7px 0;" class="text-center" colspan="5"><tr>
+                        <td style="padding: 7px 0; text-align: left; border-bottom: 1px solid #bfbfbf; border-spacing: 0;">hitoritabi (solo trip) </td>
+                        <td style="padding: 7px 0; text-align: right; border-bottom: 1px solid #bfbfbf; border-spacing: 0;">1</td>
+                        <td style="padding: 7px 0; text-align: right; border-bottom: 1px solid #bfbfbf; border-spacing: 0;">$12,500.00</td>
+                        <td style="padding: 7px 0; text-align: right; border-bottom: 1px solid #bfbfbf; border-spacing: 0;">0%</td>
+                        <td style="padding: 7px 0; text-align: right; border-bottom: 1px solid #bfbfbf; border-spacing: 0;">$12,500.00</td>
+                    </tr></td>
+                </tr>
+                <tr>
+                   <th style="text-align: left; padding: 7px 0;">Sub Total</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <td style="text-align: right; padding: 7px 0;">$12,500.00</td>
+                </tr>
+                <tr>
+                   <th style="text-align: left; padding: 7px 0;">Tax</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <td style="text-align: right; padding: 7px 0;">$0.00</td>
+                </tr>
+                <tr>
+                   <th style="text-align: left; padding: 7px 0;">Discount</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <td style="text-align: right; padding: 7px 0;">$0.00</td>
+                </tr>
+                <tr>
+                   <th style="text-align: left;">Total</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <td style="text-align: right; padding: 7px 0;">$12,500.00</td>
+                </tr>
+                <tr>
+                   <td style="padding: 7px 0;" class="text-center" colspan="5"></td>
+                </tr>
+                <tr>
+                   <th style="text-align: left; padding: 7px 0;">Exchange</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <td style="text-align: right; padding: 7px 0;"></td>
+                </tr></table>`;
+    return view('invoice-print-template', compact('html'));
+});
+
+Route::post('/socket/template-bin', function () {
+    return response()->json([
+        'success' => true,
+    ]);
 });

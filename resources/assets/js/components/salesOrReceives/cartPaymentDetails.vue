@@ -658,7 +658,7 @@
                         postURL;
                     cartItemsToStore.highest_invoice_number = this.lastInvoiceNumber;
 
-                    if(cartItemsToStore.orderType == 'sales') {
+                    if (cartItemsToStore.orderType == 'sales') {
                         postURL = '/store';
                     } else postURL = '/purchase-store';
 
@@ -685,7 +685,7 @@
                     if (action == 'continue') {
                         cartItemsToStore.status = 'pending';
 
-                        if(cartItemsToStore.orderType == 'sales') {
+                        if (cartItemsToStore.orderType == 'sales') {
                             postURL = '/continue-sale';
                         } else postURL = '/continue-purchase';
                     }

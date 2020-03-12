@@ -8,6 +8,7 @@
 
 <script>
     import axiosGetPost from "../../helper/axiosGetPostCommon";
+
     export default {
         extends: axiosGetPost,
 
@@ -56,7 +57,7 @@
         },
         methods: {
             printReceiptBeforeDonePayment() {
-                if (this.isMobile) {
+                if (!this.isMobile) {
                     $("#cart-print-area").printThis({
                         importCSS: false,
                         importStyle: true,
@@ -65,7 +66,13 @@
                         header: null
                     });
                 } else {
-
+                    this.axiosPost('/socket/template-bin', {
+                        'html': this.invoiceTemplate
+                    }, (res) => {
+                        console.log(res)
+                    }, (err) => {
+                        console.log(err)
+                    });
                 }
                 this.$emit("resetGetInvoiceBeforeDonePayment", false);
             },
