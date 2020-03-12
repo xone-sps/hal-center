@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Queue\SerializesModels;
@@ -20,9 +21,13 @@ class PrintServiceMessagePushed implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct()
+    private $user;
+    private $data;
+
+    public function __construct(User $user, $data)
     {
-        //
+        $this->user = $user;
+        $this->data = $data;
     }
 
     /**
@@ -55,9 +60,10 @@ class PrintServiceMessagePushed implements ShouldBroadcastNow
     {
         $request = request();
         return [
+            'client_ip' => $request->getClientIp(),
+            'client_email' => $this->user->email,
             'title' => 'This notification from printing service',
-            'ip' => $request->ip(),
-            'client_ip' => $request->getClientIp()
+            'data' => $this->data,
         ];
     }
 }

@@ -66,7 +66,7 @@
                         header: null
                     });
                 } else {
-                    this.axiosPost('/socket/template-bin', {
+                    this.axiosPost('/socket/store/image-template', {
                         'html': this.invoiceTemplate
                     }, (res) => {
                         console.log(res)
