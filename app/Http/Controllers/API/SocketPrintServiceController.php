@@ -36,6 +36,7 @@ class SocketPrintServiceController extends Controller
             ->save(public_path($this->image_path . $filename));
 
         $data = [
+            'id' => $this->createRandomId($user),
             'filename' => $filename,
             'url' => url($this->image_path . $filename),
             'content' => $html
@@ -93,5 +94,11 @@ class SocketPrintServiceController extends Controller
     {
         $random = uniqid('template-print') . Str::random();
         return "{$user->id}_template_" . $random . ".png";
+    }
+
+    public function createRandomId($user)
+    {
+        $random = uniqid('invoice-print-id') . Str::random();
+        return "{$user->id}" . $random . ".png";
     }
 }
