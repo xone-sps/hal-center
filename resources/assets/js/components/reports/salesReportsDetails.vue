@@ -62,7 +62,7 @@
         },
         computed: {
             isMobile() {
-                return window.innerWidth <= 1024
+                return window.innerWidth <= 920
             }
         },
         mounted() {

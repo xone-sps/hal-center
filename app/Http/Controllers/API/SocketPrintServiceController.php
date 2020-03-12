@@ -17,7 +17,7 @@ class SocketPrintServiceController extends Controller
         $user = $request->user('web');
         $filename = $this->createFileName($user);
         if ($request->exists('html')) {
-            $html = $request->get('html');
+            $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $request->get('html'));
             $html = view('invoice-print-template', compact('html'));
             $html = $html->render();
         } else {
