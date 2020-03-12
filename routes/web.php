@@ -433,13 +433,13 @@ Route::get('socket/t', function () {
 Route::get('socket/view', function () {
     Spatie\Browsershot\Browsershot::url('http://167.99.67.79/socket/bin')
         ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
-        ->device('Pixel 2 XL')
         ->mobile()
         ->touch()
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
-    return url('/test-image/test.png');
+    $url = url('/test-image/test.png');
+    return "<img src='$url' />";
 });
 
 Route::get('socket/bin', function () {
