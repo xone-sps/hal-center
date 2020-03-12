@@ -432,11 +432,7 @@ Route::get('socket/t', function () {
 });
 Route::get('socket/view', function () {
     Spatie\Browsershot\Browsershot::url('http://167.99.67.79/socket/bin')
-        ->userAgent('Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36')
-        ->windowSize(411, 823)
-        ->touch()
-        ->mobile()
-        ->landscape(false)
+        ->device('iPhone X')
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
     return response()->download(public_path('/test-image/test.png'));
