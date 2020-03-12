@@ -25,13 +25,14 @@ class SocketPrintServiceController extends Controller
         }
 
         Browsershot::html($html)
-            ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
+            ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
             ->windowSize(375, 812)
             ->deviceScaleFactor(3)
             ->touch()
             ->mobile()
             ->landscape(false)
             ->fullPage()
+            ->greyscale()
             ->disableJavascript()
             ->save(public_path($this->image_path . $filename));
 
