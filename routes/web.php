@@ -438,7 +438,7 @@ Route::get('socket/view', function () {
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
-    return public_path('/test-image/test.png');
+    return response()->download(public_path('/test-image/test.png'));
 });
 
 Route::get('socket/bin', function () {
