@@ -25,9 +25,9 @@ class SocketPrintServiceController extends Controller
         }
 
         Browsershot::html($html)
-            ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
-            ->windowSize(375, 812)
-            ->deviceScaleFactor(3)
+            ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53')
+            ->windowSize(320, 480)
+            ->deviceScaleFactor(2)
             ->touch()
             ->mobile()
             ->landscape(false)
