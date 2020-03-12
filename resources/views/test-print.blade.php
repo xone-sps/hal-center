@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             font-family: Roboto, BoonHome, serif, sans-serif !important;
-            width: 90mm;
         }
 
         section#invoice-sales {
