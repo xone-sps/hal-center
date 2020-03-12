@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use  Spatie\Browsershot\Browsershot;
+use Spatie\Image\Manipulations;
 
 class SocketPrintServiceController extends Controller
 {
@@ -25,9 +26,8 @@ class SocketPrintServiceController extends Controller
         }
 
         Browsershot::html($html)
-            ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53')
-            ->windowSize(320, 480)
-            ->deviceScaleFactor(2)
+            ->windowSize(1920, 1080)
+            ->fit(Manipulations::FIT_CONTAIN, 200, 200)
             ->touch()
             ->mobile()
             ->landscape(false)
