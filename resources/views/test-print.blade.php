@@ -30,7 +30,7 @@
 <body>
 <div>
     <div id="cart-print-area">
-        <div style="text-align: center; font-family:  sans-serif;">
+        <div style="text-align: center">
             <p></p>
             <div>
                 <img class="invoice-logo" style="max-width: 140px; height: auto; margin: 0 auto;"
