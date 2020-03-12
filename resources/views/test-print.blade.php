@@ -13,17 +13,15 @@
         }
 
         section#invoice-sales {
-            font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
-            arial, serif, sans-serif !important;
+            font-family: Roboto, BoonHome, serif, sans-serif !important;
         }
 
         table#table-sales * {
-            font-family: Roboto, "Google Sans", "Open Sans", BoonHome, "Phetsarath OT",
-            arial, serif, sans-serif !important;
+            font-family: Roboto, BoonHome, serif, sans-serif !important;
         }
 
         #cart-print-area {
-            font-size: 18px;
+            font-size: 19px;
         }
     </style>
 </head>
