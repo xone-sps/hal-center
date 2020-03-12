@@ -99,6 +99,6 @@ class SocketPrintServiceController extends Controller
     public function createRandomId($user)
     {
         $random = uniqid('invoice-print-id') . Str::random();
-        return "{$user->id}" . $random . ".png";
+        return "{$user->id}" . $random;
     }
 }
