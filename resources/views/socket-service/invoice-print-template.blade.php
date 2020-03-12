@@ -22,7 +22,6 @@
         }
 
         #cart-print-area {
-            padding-left: 6px;
             font-size: 14pt;
         }
     </style>
