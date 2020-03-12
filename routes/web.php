@@ -439,7 +439,7 @@ Route::get('socket/view', function () {
         ->landscape(false)
         ->fullPage()
         ->save(public_path('/test-image/test.png'));
-    return 'ok';
+    return url('/test-image/test.png');
 });
 
 Route::get('socket/bin', function () {
