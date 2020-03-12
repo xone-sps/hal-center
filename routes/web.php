@@ -536,6 +536,7 @@ Route::get('socket/bin', function () {
 
 Route::post('/socket/template-bin', function () {
     return response()->json([
+        'user' => request()->user(),
         'success' => true,
     ]);
 });
