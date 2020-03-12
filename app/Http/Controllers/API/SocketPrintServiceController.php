@@ -26,8 +26,8 @@ class SocketPrintServiceController extends Controller
 
         Browsershot::html($html)
             ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
-            ->windowSize(360, 640)
-            ->deviceScaleFactor(2)
+            ->windowSize(375, 812)
+            ->deviceScaleFactor(3)
             ->touch()
             ->mobile()
             ->landscape(false)
