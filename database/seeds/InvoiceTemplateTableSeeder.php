@@ -223,7 +223,7 @@ class InvoiceTemplateTableSeeder extends Seeder
        <!--header top end-->
 
         <!--header bottom start-->
-        <div style="margin-bottom:-30px; height:170px; width: 100%; overflow: hidden; display: block; font-family: \'Open Sans\' , Roboto, \'Phetsarath OT\' , sans-serif;">
+        <div style="margin-bottom:-30px; height: auto; width: 100%; overflow: hidden; display: block; font-family: \'Open Sans\' , Roboto, \'Phetsarath OT\' , sans-serif;">
              <div style="float:left; width: 50%;">
                  <p style="font-weight:bold;">Invoice ID: <span>{invoice_id}</span></p>
                  <p style="font-weight:bold;">Purchased From: <span>{supplier_name}</span></p>
@@ -314,7 +314,7 @@ class InvoiceTemplateTableSeeder extends Seeder
                                <h3 style="text-align:center;">INVOICE</h3>
                            </div>
                            <!--header bottom start-->
-                            <div style="margin-bottom:-30px; height:170px; width: 100%; overflow: hidden; display: block; font-family: \'Open Sans\' , Roboto, \'Phetsarath OT\' , sans-serif;">
+                            <div style="margin-bottom:-30px; height: auto; width: 100%; overflow: hidden; display: block; font-family: \'Open Sans\' , Roboto, \'Phetsarath OT\' , sans-serif;">
                                  <div style="float:left; width: 50%;">
                                      <p style="font-weight:bold;">Invoice ID: <span>{invoice_id}</span></p>
                                      <p style="font-weight:bold;">Purchased From: <span>{supplier_name}</span></p>
