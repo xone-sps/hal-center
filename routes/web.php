@@ -431,6 +431,10 @@ Route::get('socket/t', function () {
     dd('Event Run Successfully.');
 });
 Route::get('socket/view', function () {
-    Spatie\Browsershot\Browsershot::url('https://google.com')->save(public_path('/test-image/test.png'));
+    Spatie\Browsershot\Browsershot::url('http://167.99.67.79/socket/bin')->save(public_path('/test-image/test.png'));
+    return 'ok';
+});
+
+Route::get('socket/bin', function () {
     return view('test-print');
 });
