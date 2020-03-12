@@ -4,7 +4,7 @@
     <style>
 
         body{
-            font-family: -apple-system, DejaVu Sans, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             font-weight: 400;
             color: #212529;
         }
@@ -19,7 +19,7 @@
     </style>
 </head>
 <body style="background: #fff !important;color:#000000">
-<div id="cart-print"  style="padding: 20px !important; color: #000;font-family:  DejaVu Sans,'Raleway', sans-serif;">
+<div id="cart-print">
     <div>  {!! $templateData !!}</div>
 </div>
 </body>

@@ -118,7 +118,7 @@ class InvoiceTemplateTableSeeder extends Seeder
                font-family: Roboto, \'Google Sans\', \'Open Sans\', BoonHome, \'Phetsarath OT\', arial, serif, sans-serif !important; 
             }
         </style>
-            <div style="text-align: center; font-family:  sans-serif;">
+            <div style="text-align: center; font-family: \'Open Sans\' , Roboto, \'Phetsarath OT\' , sans-serif;">
                         <p>{app_logo}</p>
                         <h1 style="font-weight: lighter; margin-bottom: 0;">{app_name}</h1>
                         <br>
