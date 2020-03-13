@@ -27,7 +27,7 @@
                     </div>
                     <div class="modal-layout-content">
                         <pre-loader v-if="showPreloader"/>
-                        <div v-else id="cart-print-area" v-html="invoiceTemplate" style="min-height: 500px; max-width: 800px; margin: 0 auto;"></div>
+                        <div v-else id="cart-print-area" v-html="invoiceTemplate"></div>
                     </div>
                 </div>
             </div>

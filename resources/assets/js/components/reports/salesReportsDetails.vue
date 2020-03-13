@@ -26,8 +26,7 @@
                         </div>
                     </div>
                     <pre-loader v-if="showPreloader"/>
-                    <div id="cart-print-area" v-else v-html="invoiceTemplate"
-                         style="min-height: 500px; max-width: 800px; margin: 0 auto;"></div>
+                    <div id="cart-print-area" v-else v-html="invoiceTemplate"></div>
                 </div>
             </div>
         </div>

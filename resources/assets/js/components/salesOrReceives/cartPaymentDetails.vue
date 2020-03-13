@@ -915,13 +915,13 @@
                 }
             },
             setPaymentDescHeight() {
-                setTimeout(function () {
-                    let totalHeight = $('#js-payment').height();
-                    let paymentTitleHeight = $('#js-payment-title').height();
-                    let paymentActionHeight = $('#js-payment-action').height();
-                    let paymentDescHeight = totalHeight - (paymentTitleHeight + paymentActionHeight + 30);
-                    $('#js-payment-description').height(paymentDescHeight);
-                }, 1000);
+                // setTimeout(function () {
+                //     let totalHeight = $('#js-payment').height();
+                //     let paymentTitleHeight = $('#js-payment-title').height();
+                //     let paymentActionHeight = $('#js-payment-action').height();
+                //     let paymentDescHeight = totalHeight - (paymentTitleHeight + paymentActionHeight + 30);
+                //     $('#js-payment-description').height(paymentDescHeight);
+                // }, 1000);
             },
             resetGetInvoice(resetGetInvoice) {
                 this.printInvoice = resetGetInvoice;
