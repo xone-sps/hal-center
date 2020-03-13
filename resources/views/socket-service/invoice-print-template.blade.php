@@ -13,6 +13,10 @@
             font-size: 14pt;
         }
 
+        h1, h2, h3, h4, h5, h6, p, a {
+            font-family: Roboto, BoonBaan, serif, sans-serif !important;
+        }
+
         section#invoice-sales {
             font-family: Roboto, BoonBaan, serif, sans-serif !important;
         }
