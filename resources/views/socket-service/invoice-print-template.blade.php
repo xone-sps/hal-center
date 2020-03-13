@@ -9,16 +9,16 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Roboto, BoonHome, serif, sans-serif !important;
+            font-family: Roboto, BoonBann, serif, sans-serif !important;
             font-size: 14pt;
         }
 
         section#invoice-sales {
-            font-family: Roboto, BoonHome, serif, sans-serif !important;
+            font-family: Roboto, BoonBann, serif, sans-serif !important;
         }
 
         table#table-sales * {
-            font-family: Roboto, BoonHome, serif, sans-serif !important;
+            font-family: Roboto, BoonBann, serif, sans-serif !important;
         }
 
         #cart-print-area {
