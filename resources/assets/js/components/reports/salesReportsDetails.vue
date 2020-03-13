@@ -26,7 +26,9 @@
                         </div>
                     </div>
                     <pre-loader v-if="showPreloader"/>
-                    <div id="cart-print-area" v-else v-html="invoiceTemplate"></div>
+                    <div style="padding: 18px;">
+                        <div id="cart-print-area" v-else v-html="invoiceTemplate"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,7 +109,7 @@
                 } else {
                     this.$emit("printingDone", true);
                     this.axiosPost('/socket/store/image-template', {
-                        'html': this.HTMLcontent
+                        'html': this.invoiceTemplate
                     }, (res) => {
                         this.$emit("printingDone", false);
                     }, (err) => {
