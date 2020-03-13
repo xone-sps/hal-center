@@ -1441,7 +1441,8 @@ tfoot {
     overflow-y: auto; }
 
   .payment-description {
-    min-height: 200px !important; }
+    /*min-height: 200px !important; */
+  }
 
   .payment-action {
     margin-bottom: 24px; }
