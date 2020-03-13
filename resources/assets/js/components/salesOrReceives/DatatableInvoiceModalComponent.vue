@@ -8,7 +8,8 @@
             {{ rowData.invoice_id }}
         </a>
 
-        <div v-if="isActiveDatatableInvoiceModal" data-backdrop="static" class="modal fade" id="datatable-invoice-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div v-if="isActiveDatatableInvoiceModal" data-backdrop="static" class="modal fade" id="datatable-invoice-modal"
+             tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-layout-header">
@@ -27,7 +28,9 @@
                     </div>
                     <div class="modal-layout-content">
                         <pre-loader v-if="showPreloader"/>
-                        <div v-else id="cart-print-area" v-html="invoiceTemplate"></div>
+                        <div style="padding: 18px;" v-else>
+                            <div id="cart-print-area" v-html="invoiceTemplate"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,6 +40,7 @@
 
 <script>
     import axiosGetPost from '../../helper/axiosGetPostCommon';
+
     export default {
         extends: axiosGetPost,
         name: "DatatableInvoiceModalComponent",
@@ -45,21 +49,21 @@
             return {
                 isActiveDatatableInvoiceModal: false,
                 selectedRowData: this.rowData,
-                responseData:'',
+                responseData: '',
                 ordersDetailsData: {},
-                showPreloader:true,
-                tabName:'',
-                routeName:'',
-                invoiceTemplate:'',
-                customerDetails:'',
-                itemDetails:'',
-                paymentDetails:'',
-                invoiceLogo:'',
-                exchange:'',
-                subTotal:'',
-                discount:'',
-                total:'',
-                totalTax:'',
+                showPreloader: true,
+                tabName: '',
+                routeName: '',
+                invoiceTemplate: '',
+                customerDetails: '',
+                itemDetails: '',
+                paymentDetails: '',
+                invoiceLogo: '',
+                exchange: '',
+                subTotal: '',
+                discount: '',
+                total: '',
+                totalTax: '',
             }
         },
         mounted() {
@@ -85,13 +89,13 @@
                         instance.invoiceTemplate = instance.responseData.invoice_templates;
                         instance.ordersDetailsData = instance.responseData.orders_details;
                         instance.customerDetails = instance.responseData.customer_details;
-                        instance.itemDetails =  instance.responseData.item_details;
-                        instance.paymentDetails =  instance.responseData.payment_details;
-                        instance.invoiceLogo =  instance.responseData.invoice_logo;
-                        instance.exchange =  instance.responseData.exchange_amount.exchange;
-                        instance.subTotal =  instance.responseData.orders_details.sub_total;
-                        instance.total =  instance.responseData.orders_details.total;
-                        instance.totalTax =  instance.responseData.orders_details.total_tax;
+                        instance.itemDetails = instance.responseData.item_details;
+                        instance.paymentDetails = instance.responseData.payment_details;
+                        instance.invoiceLogo = instance.responseData.invoice_logo;
+                        instance.exchange = instance.responseData.exchange_amount.exchange;
+                        instance.subTotal = instance.responseData.orders_details.sub_total;
+                        instance.total = instance.responseData.orders_details.total;
+                        instance.totalTax = instance.responseData.orders_details.total_tax;
                         instance.discount = instance.responseData.orders_details.all_discount;
                         instance.printInvoiceGenerate();
                         instance.showPreloader = false;
@@ -113,8 +117,8 @@
             printInvoiceGenerate() {
                 let instance = this;
 
-                instance.itemDetails =  this.getInvoiceDetails(instance.itemDetails);
-                instance.paymentDetails =  this.makePaymentDetailsForInvoice(instance.paymentDetails);
+                instance.itemDetails = this.getInvoiceDetails(instance.itemDetails);
+                instance.paymentDetails = this.makePaymentDetailsForInvoice(instance.paymentDetails);
 
                 let invoiceLogo = this.publicPath + '/uploads/logo/' + instance.invoiceLogo,
                     logo = `<div>
@@ -125,7 +129,7 @@
                     '{app_logo}': logo,
                     '{app_name}': this.app_name,
                     '{invoice_id}': instance.ordersDetailsData.invoice_id,
-                    '{employee_name}': instance.ordersDetailsData.first_name + ' ' +instance.ordersDetailsData.last_name,
+                    '{employee_name}': instance.ordersDetailsData.first_name + ' ' + instance.ordersDetailsData.last_name,
                     '{table_name}': '',
                     '{customer_name}': instance.ordersDetailsData.customer_name,
                     '{supplier_name}': instance.ordersDetailsData.customer_name,
@@ -140,7 +144,7 @@
                     '{exchange}': instance.numberFormat(this.exchange),
                 };
 
-                if(this.ordersDetailsData.table_id != null){
+                if (this.ordersDetailsData.table_id != null) {
                     obj['{table_name}'] = this.ordersDetailsData.table_name;
                 }
 
