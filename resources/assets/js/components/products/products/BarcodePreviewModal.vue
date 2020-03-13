@@ -149,7 +149,7 @@
             },
             print() {
                 $("#barcode").printThis({
-                    importCSS: true,
+                    importCSS: false,
                     importStyle: true,
                     printContainer: true,
                     header: null

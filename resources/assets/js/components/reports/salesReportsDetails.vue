@@ -99,7 +99,7 @@
             printReceiptBeforeDonePayment() {
                 if (!this.isMobile) {
                     $('#cart-print-area').printThis({
-                        importCSS: true,
+                        importCSS: false,
                         importStyle: true,
                         printContainer: true,
                         header: null,
