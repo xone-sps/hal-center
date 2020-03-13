@@ -16,6 +16,7 @@ class SocketPrintServiceController extends Controller
     {
         $user = $request->user('web');
         $filename = $this->createFileName($user);
+        $image_path = public_path($this->image_path . $filename);
         if ($request->exists('html')) {
             $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $request->get('html'));
             $html = view('socket-service.invoice-print-template', compact('html'));
@@ -33,13 +34,13 @@ class SocketPrintServiceController extends Controller
             ->landscape(false)
             ->fullPage()
             ->disableJavascript()
-            ->save(public_path($this->image_path . $filename));
+            ->save($image_path);
 
         $data = [
             'id' => $this->createRandomId($user),
             'filename' => $filename,
             'url' => url($this->image_path . $filename),
-            'content' => $html
+            'content' => base64_encode(file_get_contents($image_path)),
         ];
         event(new PrintServiceMessagePushed($user, $data));
 
