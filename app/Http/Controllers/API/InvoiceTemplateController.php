@@ -139,12 +139,11 @@ class InvoiceTemplateController extends Controller
 
         $replace = array(
             '{app_name}' => $appName,
-            '<p>{app_logo}</p>' => $logo,
+            '{app_logo}' => $logo,
             '{invoice_id}' => $orderDetails->invoice_id,
             '{employee_name}' => $orderDetails->employee_name,
             '{date}' => $allSettingFormat->getDate($orderDetails->date),
             '{time}' => $allSettingFormat->timeFormat($orderDetails->created_at),
-
             '<tr>
                    <td style="padding: 7px 0;" class="text-center" colspan="5">{item_details}</td>
                 </tr>' => $itemDetails,

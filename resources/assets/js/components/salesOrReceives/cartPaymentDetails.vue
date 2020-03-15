@@ -328,7 +328,7 @@
                         {{ trans('lang.print_received') }}
                     </a>
                     <a v-else href="#"
-                     class="printReceiptButton">
+                       class="printReceiptButton">
                         <i class="la la-spin la-spinner mr-3"></i>
                         {{ trans('lang.print_received') }}
                     </a>
@@ -767,6 +767,19 @@
                                 {
                                     if ("invoiceTemplate" in responseData) {
                                         instance.HTMLcontent = responseData.invoiceTemplate.data;
+
+                                        const itemDetails = instance.getInvoiceDetails(cartItemsToStore.cart);
+                                        const paymentDetails = instance.makePaymentDetailsForInvoice(cartItemsToStore.payments);
+                                        console.log([paymentDetails])
+                                        let obj = {
+                                            '{item_details}': itemDetails,
+                                            '{payment_details}': '',
+                                        };
+
+                                        for (let [key, value] of Object.entries(obj)) {
+                                            instance.HTMLcontent = instance.HTMLcontent.replace(key, value);
+                                        }
+                                        console.log([instance.HTMLcontent])
                                     }
                                     this.lastInvoiceNumber = responseData.lastInvoiceId;
                                     if (action == 'continue') {
@@ -810,7 +823,7 @@
 
                 let invoiceLogo = this.publicPath + '/uploads/logo/' + this.logo,
                     logo = `<div>
-                                <img class="invoice-logo" style="max-width: 200px; height: auto; margin: 0 auto;" src= "${invoiceLogo}" alt="Logo">
+                                <img class="invoice-logo" style="max-width: 160px; height: auto; margin: 0 auto;" src= "${invoiceLogo}" alt="Logo">
                             </div>`,
                     employeeName = cartItemsToStore.user.first_name + " " + cartItemsToStore.user.last_name,
                     itemDetails = instance.getInvoiceDetails(cartItemsToStore.cart),

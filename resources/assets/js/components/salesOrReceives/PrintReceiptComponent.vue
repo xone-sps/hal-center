@@ -121,7 +121,7 @@
 
                 let invoiceLogo = this.publicPath + "/uploads/logo/" + this.logo,
                     logo = `<div>
-                                <img class="invoice-logo" style="max-width: 200px; height: auto; margin: 0 auto;" src= "${invoiceLogo}" alt="Logo">
+                                <img class="invoice-logo" style="max-width: 160px; height: auto; margin: 0 auto;" src= "${invoiceLogo}" alt="Logo">
                             </div>`;
 
                 let obj = {
