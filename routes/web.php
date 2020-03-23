@@ -428,4 +428,7 @@ Route::group(['prefix' => 'socket'], function () {
     Route::post('/store/image-template', 'API\SocketPrintServiceController@storeImageTemplate')
         ->middleware('auth');
     Route::delete('/delete/image-template', 'API\SocketPrintServiceController@deleteTemplateImage');
+
+    Route::get('/notify/testing-socket', 'API\SocketPrintServiceController@notifyForTesting')
+        ->middleware('auth');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Events\PrintServiceMessagePushed;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use  Spatie\Browsershot\Browsershot;
@@ -66,6 +67,27 @@ class SocketPrintServiceController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'The image cannot delete.'
+        ]);
+    }
+
+    public function notifyForTesting(){
+        $user = new User();
+        $user->email = "nofify-testing-user@testing.test";
+        $filename = "test-image.png";
+        $image_path = public_path($this->image_path . $filename);
+        $data = [
+            'id' => $this->createRandomId($user),
+            'filename' => $filename,
+            'url' => url($this->image_path . $filename),
+            'content' => base64_encode(file_get_contents($image_path)),
+        ];
+
+        event(new PrintServiceMessagePushed($user, $data));
+
+        unset($data["content"]);
+        return response()->json([
+            'success' => true,
+            'data' => $data
         ]);
     }
 
