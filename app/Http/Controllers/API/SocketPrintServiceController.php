@@ -75,9 +75,6 @@ class SocketPrintServiceController extends Controller
         $user = new User();
         $user->id = 1;
         $user->email = "nofify-testing-user@testing.test";
-
-        dd($user);
-
         $filename = "test-image.png";
         $image_path = public_path($this->image_path . $filename);
         $data = [
