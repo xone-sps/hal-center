@@ -70,11 +70,9 @@ class SocketPrintServiceController extends Controller
         ]);
     }
 
-    public function notifyForTesting()
+    public function notifyForTesting(Request $request)
     {
-        $user = new User();
-        $user->id = 1;
-        $user->email = "nofify-testing-user@testing.test";
+        $user = $request->user('web');
         $filename = "test-image.png";
         $image_path = public_path($this->image_path . $filename);
         $data = [
