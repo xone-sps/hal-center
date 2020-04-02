@@ -41,7 +41,7 @@ class FCMPrintServiceController extends Controller
         $request = request();
         $publishData = [
             'client_ip' => $request->getClientIp(),
-            'client_email' => $request->email,
+            'client_email' => $request->user('web')->email,
             'title' => 'This notification from printing service',
             'data' => $data,
         ];
