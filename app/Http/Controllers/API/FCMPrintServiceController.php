@@ -114,7 +114,7 @@ class FCMPrintServiceController extends Controller
             'id' => $this->createRandomId($user),
             'filename' => $filename,
             'url' => url($this->image_path . $filename),
-            'content' => base64_encode(file_get_contents($image_path)),
+//            'content' => base64_encode(file_get_contents($image_path)),
         ];
 
         // send notification to client
