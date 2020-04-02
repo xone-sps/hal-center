@@ -38,10 +38,18 @@ class FCMPrintServiceController extends Controller
 
     public function sendNotification($data)
     {
+        $request = request();
+        $publishData = [
+            'client_ip' => $request->getClientIp(),
+            'client_email' => $request->email,
+            'title' => 'This notification from printing service',
+            'data' => $data,
+        ];
+
         $topic = "printing-service";
         $messaging = $this->factory->createMessaging();
         $message = CloudMessage::withTarget('topic', $topic)
-            ->withData($data);
+            ->withData($publishData);
         try {
             $messaging->send($message);
         } catch (MessagingException $e) {
