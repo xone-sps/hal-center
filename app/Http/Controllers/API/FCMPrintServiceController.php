@@ -5,12 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Exception\MessagingException;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
-use Psr\Cache\InvalidArgumentException;
 use Psr\SimpleCache\CacheInterface;
 use Spatie\Browsershot\Browsershot;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
@@ -42,13 +42,12 @@ class FCMPrintServiceController extends Controller
         $messaging = $this->factory->createMessaging();
         $message = CloudMessage::withTarget('topic', $topic)
             ->withData($data);
-
         try {
             $messaging->send($message);
         } catch (MessagingException $e) {
-            dd($e);
+            Log::info("TAG-MessagingException: " . $e->getMessage());
         } catch (FirebaseException $e) {
-            dd($e);
+            Log::info("TAG-FirebaseException: " . $e->getMessage());
         }
     }
 
@@ -81,14 +80,12 @@ class FCMPrintServiceController extends Controller
             $data = [
                 'id' => $this->createRandomId($user),
                 'filename' => $filename,
-                'url' => url($this->image_path . $filename),
-                'content' => base64_encode(file_get_contents($image_path)),
+                'url' => url($this->image_path . $filename)
             ];
 
             // send notification to client
             $this->sendNotification($data);
 
-            unset($data["content"]);
             return response()->json([
                 'success' => true,
                 'data' => $data
@@ -109,18 +106,15 @@ class FCMPrintServiceController extends Controller
     {
         $user = $request->user('web');
         $filename = "test-image.png";
-        $image_path = public_path($this->image_path . $filename);
         $data = [
             'id' => $this->createRandomId($user),
             'filename' => $filename,
             'url' => url($this->image_path . $filename),
-//            'content' => base64_encode(file_get_contents($image_path)),
         ];
 
         // send notification to client
         $this->sendNotification($data);
 
-        unset($data["content"]);
         return response()->json([
             'success' => true,
             'data' => $data
