@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Broadcast Redis Socket io - sabungdai.com</h1>
+    <h1>Broadcast Redis Socket IO - Sabungdai.com</h1>
 
     <div id="notification"></div>
 </div>

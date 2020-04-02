@@ -41,6 +41,8 @@ return [
         'echo' => [
             'port' => env('LARAVEL_ECHO_PORT'),
         ]
-    ]
-
+    ],
+    'firebase-account' => [
+        'service-account' => env('FIREBASE_CREDENTIALS')
+    ],
 ];

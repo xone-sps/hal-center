@@ -2,15 +2,56 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Events\PrintServiceMessagePushed;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Psr\Cache\InvalidArgumentException;
 use Spatie\Browsershot\Browsershot;
+use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-class SocketPrintServiceController extends Controller
+
+class FCMPrintServiceController extends Controller
 {
+    private $factory;
+
+
     public $image_path = "/socket-template-image/";
+
+    /**
+     * FCMPrintServiceController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        try {
+            $cache = new FilesystemAdapter();
+            $serviceJsonFile = $cache->getItem('service_json_file');
+            $this->factory = (new Factory)
+                ->withServiceAccount(config('services.firebase-account.service-account'))
+                ->withVerifierCache($serviceJsonFile);
+        } catch (InvalidArgumentException $e) {
+            dd($e);
+        }
+    }
+
+    public function sendNotification($data)
+    {
+        $topic = "printing-service";
+        $messaging = $this->factory->createMessaging();
+        $message = CloudMessage::withTarget('topic', $topic)
+            ->withData($data);
+
+        try {
+            $messaging->send($message);
+        } catch (MessagingException $e) {
+        } catch (FirebaseException $e) {
+        }
+    }
 
     public function storeImageTemplate(Request $request)
     {
@@ -25,47 +66,43 @@ class SocketPrintServiceController extends Controller
             $html = $this->defaultHtmlTemplate();
         }
 
-        Browsershot::html($html)
-            ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
-            ->windowSize(375, 812)
-            ->deviceScaleFactor(3)
-            ->touch()
-            ->mobile()
-            ->landscape(false)
-            ->fullPage()
-            ->disableJavascript()
-            ->save($image_path);
-
-        $data = [
-            'id' => $this->createRandomId($user),
-            'filename' => $filename,
-            'url' => url($this->image_path . $filename),
-            'content' => base64_encode(file_get_contents($image_path)),
-        ];
-
-        event(new PrintServiceMessagePushed($user, $data));
-
-        unset($data["content"]);
-        return response()->json([
-            'success' => true,
-            'data' => $data
-        ]);
-    }
-
-    public function deleteTemplateImage(Request $request)
-    {
         try {
-            unlink(public_path($this->image_path . $request->filename));
+
+            Browsershot::html($html)
+                ->userAgent('Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36')
+                ->windowSize(375, 812)
+                ->deviceScaleFactor(3)
+                ->touch()
+                ->mobile()
+                ->landscape(false)
+                ->fullPage()
+                ->disableJavascript()
+                ->save($image_path);
+
+            $data = [
+                'id' => $this->createRandomId($user),
+                'filename' => $filename,
+                'url' => url($this->image_path . $filename),
+                'content' => base64_encode(file_get_contents($image_path)),
+            ];
+
+            // send notification to client
+            $this->sendNotification($data);
+
+            unset($data["content"]);
             return response()->json([
                 'success' => true,
-                'message' => 'The image was deleted.'
+                'data' => $data
             ]);
-        } catch (\Exception $exception) {
+
+        } catch (CouldNotTakeBrowsershot $ignored) {
 
         }
+
         return response()->json([
             'success' => false,
-            'message' => 'The image cannot delete.'
+            'message' => 'Failed to make a snapshot',
+            'data' => ''
         ]);
     }
 
@@ -81,18 +118,14 @@ class SocketPrintServiceController extends Controller
             'content' => base64_encode(file_get_contents($image_path)),
         ];
 
-        event(new PrintServiceMessagePushed($user, $data));
+        // send notification to client
+        $this->sendNotification($data);
 
         unset($data["content"]);
         return response()->json([
             'success' => true,
             'data' => $data
         ]);
-    }
-
-    public function messageForTesting()
-    {
-        return view('socket-service.socket');
     }
 
     public function defaultHtmlTemplate()

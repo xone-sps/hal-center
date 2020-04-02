@@ -425,11 +425,11 @@ Route::get('/js/lang.js', function () {
 // Socket Print Service Job For Mobile Printer
 
 Route::group(['prefix' => 'socket'], function () {
-    Route::post('/store/image-template', 'API\SocketPrintServiceController@storeImageTemplate')
+    Route::post('/store/image-template', 'API\FCMPrintServiceController@storeImageTemplate')
         ->middleware('auth');
     Route::delete('/delete/image-template', 'API\SocketPrintServiceController@deleteTemplateImage');
 
-    Route::get('/notify/testing-socket', 'API\SocketPrintServiceController@notifyForTesting')
+    Route::get('/notify/testing-socket', 'API\FCMPrintServiceController@notifyForTesting')
         ->middleware('auth');
     Route::get('/notify-message/testing-socket', 'API\SocketPrintServiceController@messageForTesting')
         ->middleware('auth');
