@@ -39,6 +39,7 @@ class FCMPrintServiceController extends Controller
 
     public function sendNotification($printData)
     {
+        $messageException = "";
         $request = request();
         $publishingData = [
             'client_ip' => $request->getClientIp(),
@@ -51,13 +52,18 @@ class FCMPrintServiceController extends Controller
             ->withData(array_merge($publishingData, $printData));
         try {
             $messaging->send($message);
+            return true;
         } catch (InvalidArgumentException $e) {
-            Log::info("TAG-FirebaseException: " . $e->getMessage());
+            $messageException = $e->getMessage();
+            Log::info("TAG-FirebaseException: " . $messageException);
         } catch (MessagingException $e) {
-            Log::info("TAG-MessagingException: " . $e->getMessage());
+            $messageException = $e->getMessage();
+            Log::info("TAG-MessagingException: " . $messageException);
         } catch (FirebaseException $e) {
-            Log::info("TAG-FirebaseException: " . $e->getMessage());
+            $messageException = $e->getMessage();
+            Log::info("TAG-FirebaseException: " . $messageException);
         }
+        return $messageException;
     }
 
     public function storeImageTemplate(Request $request)
@@ -93,11 +99,19 @@ class FCMPrintServiceController extends Controller
             ];
 
             // send notification to client
-            $this->sendNotification($data);
+            $sent = $this->sendNotification($data);
+
+            if ($sent === true) {
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ]);
+            }
 
             return response()->json([
-                'success' => true,
-                'data' => $data
+                'success' => false,
+                'message' => $sent,
+                'data' => ''
             ]);
 
         } catch (CouldNotTakeBrowsershot $ignored) {
@@ -122,11 +136,18 @@ class FCMPrintServiceController extends Controller
         ];
 
         // send notification to client
-        $this->sendNotification($data);
+        $sent = $this->sendNotification($data);
+        if ($sent === true) {
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ]);
+        }
 
         return response()->json([
-            'success' => true,
-            'data' => $data
+            'success' => false,
+            'message' => $sent,
+            'data' => '',
         ]);
     }
 
