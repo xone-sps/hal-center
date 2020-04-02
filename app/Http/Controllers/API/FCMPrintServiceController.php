@@ -36,20 +36,18 @@ class FCMPrintServiceController extends Controller
             ->withVerifierCache($cache);
     }
 
-    public function sendNotification($data)
+    public function sendNotification($printData)
     {
         $request = request();
-        $publishData = [
+        $publishingData = [
             'client_ip' => $request->getClientIp(),
             'client_email' => $request->user('web')->email,
-            'title' => 'This notification from printing service',
-            'data' => $data,
         ];
 
         $topic = "printing-service";
         $messaging = $this->factory->createMessaging();
         $message = CloudMessage::withTarget('topic', $topic)
-            ->withData($publishData);
+            ->withData(array_merge($publishingData, $printData));
         try {
             $messaging->send($message);
         } catch (MessagingException $e) {
