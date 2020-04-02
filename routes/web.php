@@ -431,4 +431,6 @@ Route::group(['prefix' => 'socket'], function () {
 
     Route::get('/notify/testing-socket', 'API\SocketPrintServiceController@notifyForTesting')
         ->middleware('auth');
+    Route::get('/notify-message/testing-socket', 'API\SocketPrintServiceController@messageForTesting')
+        ->middleware('auth');
 });

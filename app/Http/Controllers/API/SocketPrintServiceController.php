@@ -91,6 +91,11 @@ class SocketPrintServiceController extends Controller
         ]);
     }
 
+    public function messageForTesting()
+    {
+        return view('socket-service.socket');
+    }
+
     public function defaultHtmlTemplate()
     {
         return "<!doctype html>

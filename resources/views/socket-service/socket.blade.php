@@ -31,13 +31,13 @@
         i++;
         $("#notification").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
     }
-    Echo.channel('user-channel')
-        .listen('.UserEvent', (data) => {
+    Echo.channel('user-print-channel')
+        .listen('.UserPrintEvent', (data) => {
             showMessage(data);
         });
 
-    Echo.private('user-channel')
-        .listen('.UserEvent', (data) => {
+    Echo.private('user-print-channel')
+        .listen('.UserPrintEvent', (data) => {
             showMessage(data);
         });
 </script>
