@@ -31,8 +31,9 @@ class FCMPrintServiceController extends Controller
         try {
             $cache = new FilesystemAdapter();
             $serviceJsonFile = $cache->getItem('service_json_file');
+            dd(storage_path(config('services.firebase-account.service-account')));
             $this->factory = (new Factory)
-                ->withServiceAccount(config('services.firebase-account.service-account'))
+                ->withServiceAccount(storage_path(config('services.firebase-account.service-account')))
                 ->withVerifierCache($serviceJsonFile);
         } catch (InvalidArgumentException $e) {
             dd($e);
