@@ -46,7 +46,9 @@ class FCMPrintServiceController extends Controller
         try {
             $messaging->send($message);
         } catch (MessagingException $e) {
+            dd($e);
         } catch (FirebaseException $e) {
+            dd($e);
         }
     }
 
