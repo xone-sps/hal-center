@@ -4,15 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Exception\MessagingException;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Psr\Cache\InvalidArgumentException;
+use Psr\SimpleCache\CacheInterface;
 use Spatie\Browsershot\Browsershot;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 
 class FCMPrintServiceController extends Controller
@@ -28,15 +29,11 @@ class FCMPrintServiceController extends Controller
     public function __construct()
     {
         parent::__construct();
-        try {
-            $cache = new FilesystemAdapter();
-            $serviceJsonFile = $cache->getItem('service_json_file');
-            $this->factory = (new Factory)
-                ->withServiceAccount(storage_path(config('services.firebase-account.service-account')))
-                ->withVerifierCache($serviceJsonFile);
-        } catch (InvalidArgumentException $e) {
-            dd($e);
-        }
+
+        $cache = new SimpleCacheBridge();
+        $this->factory = (new Factory)
+            ->withServiceAccount(storage_path(config('services.firebase-account.service-account')))
+            ->withVerifierCache($cache);
     }
 
     public function sendNotification($data)
@@ -162,5 +159,66 @@ class FCMPrintServiceController extends Controller
     {
         $random = uniqid('invoice-print-id') . Str::random();
         return "{$user->id}" . $random;
+    }
+}
+
+class SimpleCacheBridge implements CacheInterface
+{
+    public function get($key, $default = null)
+    {
+        return Cache::get($key, $default);
+    }
+
+    public function set($key, $value, $ttl = null)
+    {
+        Cache::put($key, $value, $this->ttl2minutes($ttl));
+
+        return true;
+    }
+
+    public function delete($key)
+    {
+        return Cache::forget($key);
+    }
+
+    public function clear()
+    {
+        return Cache::flush();
+    }
+
+    public function getMultiple($keys, $default = null)
+    {
+        return Cache::many($keys);
+    }
+
+    public function setMultiple($values, $ttl = null)
+    {
+        Cache::putMany($values, $this->ttl2minutes($ttl));
+
+        return true;
+    }
+
+    public function deleteMultiple($keys)
+    {
+        foreach ($keys as $key) {
+            $this->delete($key);
+        }
+    }
+
+    public function has($key)
+    {
+        return Cache::has($key);
+    }
+
+    protected function ttl2minutes($ttl)
+    {
+        if (is_null($ttl)) {
+            return null;
+        }
+        if ($ttl instanceof \DateInterval) {
+            return $ttl->days * 86400 + $ttl->h * 3600 + $ttl->i * 60;
+        }
+
+        return $ttl / 60;
     }
 }
