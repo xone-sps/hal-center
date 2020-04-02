@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\InvalidArgumentException;
 use Kreait\Firebase\Exception\MessagingException;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
@@ -50,6 +51,8 @@ class FCMPrintServiceController extends Controller
             ->withData(array_merge($publishingData, $printData));
         try {
             $messaging->send($message);
+        } catch (InvalidArgumentException $e) {
+            Log::info("TAG-FirebaseException: " . $e->getMessage());
         } catch (MessagingException $e) {
             Log::info("TAG-MessagingException: " . $e->getMessage());
         } catch (FirebaseException $e) {
