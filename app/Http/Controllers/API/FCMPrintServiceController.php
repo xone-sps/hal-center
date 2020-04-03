@@ -11,6 +11,8 @@ use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Exception\InvalidArgumentException;
 use Kreait\Firebase\Exception\MessagingException;
 use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging\AndroidConfig;
+use Kreait\Firebase\Messaging\ApnsConfig;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Psr\SimpleCache\CacheInterface;
 use Spatie\Browsershot\Browsershot;
@@ -45,9 +47,21 @@ class FCMPrintServiceController extends Controller
             'client_email' => $request->user('web')->email,
         ];
 
+        $androidConfig = AndroidConfig::fromArray([
+            'ttl' => '3600s',
+            'priority' => 'high'
+        ]);
+        $apnsConfig = ApnsConfig::fromArray([
+            'headers' => [
+                'apns-priority' => '10',
+            ],
+        ]);
+
         $topic = "printing-service";
         $messaging = $this->factory->createMessaging();
         $message = CloudMessage::withTarget('topic', $topic)
+            ->withAndroidConfig($androidConfig)
+            ->withApnsConfig($apnsConfig)
             ->withData(array_merge($publishingData, $printData));
         try {
             $messaging->send($message);
