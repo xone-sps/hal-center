@@ -50,8 +50,7 @@ class FCMPrintServiceController extends Controller
         $message = CloudMessage::withTarget('topic', $topic)
             ->withData(array_merge($publishingData, $printData));
         try {
-            $res = $messaging->send($message);
-            dd($res);
+            $messaging->send($message);
             return true;
         } catch (InvalidArgumentException $e) {
             $messageException = $e->getMessage();
