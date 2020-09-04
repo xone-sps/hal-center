@@ -39,7 +39,7 @@
     "vue-chartjs": "^3.5.0",
     "vue-cookies": "^1.5.13",
     "vue-js-popover": "^1.1.8",
-    "vue-moment": "^3.2.0",
+    "vue-moment": "^4.1.0",
     "vue-shortkey": "^3.1.7",
     "vue-timeselector": "^1.0.0",
     "vue-toasted": "^1.1.27",
