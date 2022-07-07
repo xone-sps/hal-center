@@ -28,7 +28,7 @@
     "img-loader": "^3.0.1",
     "laravel-echo": "^1.6.1",
     "laravel-echo-server": "^1.6.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "number-currency-format": "^1.0.10",
     "print-this": "^1.15.1",
     "puppeteer": "^2.1.1",
